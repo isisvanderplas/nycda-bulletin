@@ -1,0 +1,14 @@
+extends ../application.pug
+
+block content
+  .container
+    .row
+      .col-xs-8.offset-xs-2
+        h1 what's on your mind?
+        hr
+        form
+          div(class="form-group")
+            label tell me!
+            textarea(class="form-control" rows=5)
+          div(class="form-group text-xs-right")
+            button(type="submit" class="btn btn-success") have a go at it!
