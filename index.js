@@ -16,50 +16,47 @@ app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var Message = sequelize.define('message', {
-  title: Sequelize.STRING,
-  body: Sequelize.TEXT
+
+app.get('/',(req, res) => {
+  res.render('public/views/edit');
 });
 
-
-app.get('/', (request, response) => {
-  Message.findAll({ order: 'id ASC' }).then((messages) => {
-    response.render('messages/index', { messages: messages });
-  });
+app.listen(3000, () => {
+  console.log('server runs on 3000');
 });
 
-
-app.get('/new', (request, response) => {
-  response.render('messages/new');
-});
-
-app.post('/messages', (request, response) => {
-  console.log('message posted');
-  if (request.body.title) {
-    Message.create(request.body).then(() => {
-      response.redirect('/');
-    });
-  } else {
-    response.redirect('/new');
-  }
-});
-
-
-sequelize.sync().then(() => {
-  console.log('connected to database');
-  app.listen(3000, () => {
-    console.log('Server is now running on port 3000');
-  });
-});
-
-
-//
-// app.get('/', (req, res) => {
-//   res.redirect('/edit');
+// var Message = sequelize.define('message', {
+//   title: Sequelize.STRING,
+//   body: Sequelize.TEXT
 // });
-
-
-
-// app.listen(3000, () => {
-//   console.log('Webserver is running on port 3000')
+//
+//
+// app.get('/', (request, response) => {
+//   Message.findAll.then((messages) => {
+//     response.render('messages/edit', { messages: messages });
+//   });
+// });
+//
+//
+// app.get('/new', (request, response) => {
+//   response.render('messages/show');
+// });
+//
+// app.post('/messages', (request, response) => {
+//   console.log('message');
+//   if (request.body.title) {
+//     Message.create(request.body).then(() => {
+//       response.redirect('/');
+//     });
+//   } else {
+//     response.redirect('/show');
+//   }
+// });
+//
+//
+// sequelize.sync().then(() => {
+//   console.log('connected to database');
+//   app.listen(3000, () => {
+//     console.log('Server is now running on port 3000');
+//   });
 // });
